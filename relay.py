@@ -83,6 +83,10 @@ def push():
     return n
 
 if __name__ == "__main__":
-    got = pull()
+    try:
+        got = pull()
+    except Exception as e:
+        got = -1  # webhook mode: getUpdates is disabled, that is expected
+        print("pull skipped:", type(e).__name__)
     sent = push()
     print("pulled %d, sent %d" % (got, sent))
